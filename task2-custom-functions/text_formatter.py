@@ -58,4 +58,4 @@ if __name__ == "__main__":
         formatted = format_text(text, prefix, suffix, capitalize, max_length)
         print(f"Formatted text: {formatted}")
     except Exception as e:
-        print(f"Error: {e}"
+        print(f"Error: {e}")
