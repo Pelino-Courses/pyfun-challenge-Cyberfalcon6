@@ -1,5 +1,13 @@
 class Product:
-    def __init__(self, name, price, quantity):
+    """
+    Product Class for tracking Name, Price and quantity of a product
+
+    Args:
+      Name(str): The name of the product
+      Price(float): The price of the product
+      Quantity(int): The quantity of the product in stock
+    """
+    def __init__(self, name:str, price:float, quantity:int):
         if not isinstance(name, str) or not name.strip():
             raise ValueError("Name must be a non-empty string.")
         if not isinstance(price, (int, float)) or price < 0:
