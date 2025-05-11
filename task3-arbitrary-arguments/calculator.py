@@ -10,12 +10,17 @@ def calculate(*args, **kwargs):
     """
     # Check if all positional arguments are numbers (int or float)
     if not all(isinstance(arg, (int, float)) for arg in args):
-        # Raise a TypeError if any positional argument is not a number
         raise TypeError("All positional arguments must be numbers.")
     if not all(isinstance(value, bool) for value in kwargs.values()):
         raise TypeError("All keyword argument values must be boolean.")
 
-    result = args[0] if args else 0
+    if not args:
+        raise ValueError("At least one number must be provided.")
+
+    if not any(kwargs.values()):
+        raise ValueError("At least one operation (add, multiply, subtract, divide) must be specified.")
+
+    result = args[0]
 
     if kwargs.get("add", False):
         result = sum(args)
@@ -23,9 +28,7 @@ def calculate(*args, **kwargs):
         result = 1
         for num in args:
             result *= num
-    # Check if the "subtract" operation is requested
     if kwargs.get("subtract", False):
-        # Subtract the sum of all arguments (except the first one) from the first argument
         result = args[0] - sum(args[1:])
     if kwargs.get("divide", False):
         for num in args[1:]:
@@ -40,6 +43,8 @@ if __name__ == "__main__":
         numbers = input("Enter numbers separated by spaces: ").split()
         numbers = [float(num) for num in numbers]
         operation = input("Enter operation (add, multiply, subtract, divide): ").strip().lower()
+        if operation not in {"add", "multiply", "subtract", "divide"}:
+            raise ValueError(f"Unsupported operation: {operation}")
         operations = {operation: True}
         print("Result:", calculate(*numbers, **operations))
     except Exception as e:
