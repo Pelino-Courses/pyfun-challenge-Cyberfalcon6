@@ -1,5 +1,6 @@
 from product import Product
-
+#trying to demonstrate how this inventory management system works
+#note that the system is product centric i.e it manages inventory at product level
 if __name__ == "__main__":
     inventory = []
     try:
